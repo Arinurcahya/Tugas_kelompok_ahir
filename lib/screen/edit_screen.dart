@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_kelompok_ahir/models/user.dart';
-import 'package:tugas_kelompok_ahir/Models/user_respository.dart';
+import 'package:tugas_kelompok_ahir/models/user_repository.dart';
 
 class EditScreen extends StatefulWidget {
   final User user;

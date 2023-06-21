@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_kelompok_ahir/models/user.dart';
-import 'package:tugas_kelompok_ahir/Models/user_respository.dart';
+import 'package:tugas_kelompok_ahir/models/user_repository.dart';
 import 'package:tugas_kelompok_ahir/screen/edit_screen.dart';
 import 'package:tugas_kelompok_ahir/screen/inputkaryawan_screen.dart';
 
@@ -78,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
   children: [
     FloatingActionButton(
       onPressed: () {
-        // Navigasi ke halaman orang
       },
       child: Icon(Icons.person),
     ),
@@ -90,7 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
     SizedBox(width: 16.0),
     FloatingActionButton(
       onPressed: () {
-        // Navigasi ke halaman barang
       },
       child: Icon(Icons.shopping_cart),
     ),

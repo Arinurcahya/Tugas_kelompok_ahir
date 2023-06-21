@@ -9,8 +9,6 @@ class UserRepository {
   }
 
   Future<bool> login(String email, String password) async {
-    // Implement your login logic here
-    // Return true if login is successful, false otherwise
     return true;
   }
 
@@ -27,8 +25,6 @@ class UserRepository {
   }
 
   Future<void> createKaryawan(karyawan) async {
-    // Implement your karyawan creation logic here
-    // For example, you can insert the karyawan into the database using dbHelper
-    // dbHelper.insertKaryawan(karyawan);
+    
   }
 }

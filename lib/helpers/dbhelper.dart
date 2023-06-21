@@ -1,7 +1,7 @@
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:path_provider/path_provider.dart';
-import 'package:tugas_kelompok_ahir/Models/user.dart';
+import 'package:tugas_kelompok_ahir/models/user.dart';
 
 class DbHelper {
   static sqflite.Database? _database;
@@ -79,4 +79,3 @@ class DbHelper {
     );
   }
 }
-jb

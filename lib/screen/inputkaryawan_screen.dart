@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tugas_kelompok_ahir/Models/user_model.dart';
-import 'package:tugas_kelompok_ahir/Models/user_respository.dart';
+import 'package:tugas_kelompok_ahir/models/user_model.dart';
+import 'package:tugas_kelompok_ahir/models/user_repository.dart';
 
 
 class InputKaryawanScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _InputKaryawanScreenState extends State<InputKaryawanScreen> {
     String email = _emailController.text.trim();
     String posisi = _posisiController.text.trim();
 
-    if (nama.isEmpty  email.isEmpty  posisi.isEmpty) {
+    if (nama.isEmpty || email.isEmpty ||  posisi.isEmpty) {
       showDialog(
         context: context,
         builder: (BuildContext context) {

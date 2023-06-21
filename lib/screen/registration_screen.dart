@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:tugas_kelompok_ahir/models/user.dart';
 import 'package:tugas_kelompok_ahir/models/user_repository.dart';
 import 'package:tugas_kelompok_ahir/screen/home.screen.dart';
-import 'package:tugas_kelompok_ahir/screen/registration_screen.dart';
 
-
-class LoginScreen extends StatefulWidget {
+class RegistrationScreen extends StatefulWidget {
   final UserRepository userRepository;
 
-  LoginScreen(this.userRepository);
+  RegistrationScreen(this.userRepository);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  void _login() async {
+  void _register() async {
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
 
@@ -42,41 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    bool success = await widget.userRepository.login(email, password);
+    User newUser = User(id: 0, name: '', email: email, password: password);
+    await widget.userRepository.createUser(newUser);
 
-    if (success) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(userRepository: widget.userRepository),
-        ),
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text('Invalid email or password.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
-  void _goToRegisterScreen() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => RegistrationScreen(widget.userRepository),
+        builder: (context) => HomeScreen(userRepository: widget.userRepository),
       ),
     );
   }
@@ -85,59 +56,48 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Registration'),
         backgroundColor: Colors.orange[700],
       ),
-      backgroundColor: Colors.orange[400],
+       backgroundColor: Colors.orange[400],
       body: Container(
         padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
+            TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-                border: OutlineInputBorder(),
+                 border: OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.white,
               ),
             ),
             SizedBox(height: 16.0),
-            TextFormField(
+            TextField(
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
-                border: OutlineInputBorder(),
+                 border: OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.white,
               ),
               obscureText: true,
             ),
-            SizedBox(height: 24.0),
+            SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: _login,
-              child: Text(
-                'Login',
-                style: TextStyle(
+              onPressed: _register,
+              child: Text('Register',
+               style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.black54, 
-                ),
+               ),
               ),
-              style: ElevatedButton.styleFrom(
+               style: ElevatedButton.styleFrom(
                 primary: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-              ),
-            ),
-            SizedBox(height: 16.0),
-            TextButton(
-              onPressed: _goToRegisterScreen,
-              child: Text(
-                'Don\'t have an account? Register',
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 16.0,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
               ),
             ),
           ],

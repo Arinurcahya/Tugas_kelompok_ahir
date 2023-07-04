@@ -4,6 +4,7 @@ import 'package:tugas_kelompok_ahir/models/user_repository.dart';
 import 'package:tugas_kelompok_ahir/screen/edit_screen.dart';
 import 'package:tugas_kelompok_ahir/screen/inputkaryawan_screen.dart';
 
+
 class HomeScreen extends StatefulWidget {
   final UserRepository userRepository;
 
@@ -29,6 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context) => InputKaryawanScreen(
           userRepository: widget.userRepository,
         ),
+      ),
+    );
+  }
+
+  void _goToProfileScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfileScreen(),
       ),
     );
   }
@@ -77,8 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
   mainAxisAlignment: MainAxisAlignment.end,
   children: [
     FloatingActionButton(
-      onPressed: () {
-      },
+      onPressed: _goToProfileScreen,
       child: Icon(Icons.person),
     ),
     SizedBox(width: 16.0),
@@ -86,12 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onPressed: _goToAddScreen,
       child: Icon(Icons.people),
     ),
-    SizedBox(width: 16.0),
-    FloatingActionButton(
-      onPressed: () {
-      },
-      child: Icon(Icons.shopping_cart),
-    ),
+    SizedBox(width: 16.0)
   ],
 ),
     );

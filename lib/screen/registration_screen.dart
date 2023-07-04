@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_kelompok_ahir/models/user.dart';
 import 'package:tugas_kelompok_ahir/models/user_repository.dart';
-import 'package:tugas_kelompok_ahir/screen/home.screen.dart';
+import 'package:tugas_kelompok_ahir/screen/login_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   final UserRepository userRepository;
@@ -41,15 +41,84 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       return;
     }
 
+      if (password != confirmPassword) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Passwords do not match.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     User newUser = User(id: 0, name: '', email: email, password: password);
+    try {
     await widget.userRepository.createUser(newUser);
 
+     showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Registration successful.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Navigate to the login page after dialog is closed
+                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(widget.userRepository),
+                    ),
+                  );
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      ).then((value) {
+        // Navigate to the login page after dialog is closed
+        Navigator.pop(context);
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(userRepository: widget.userRepository),
+        builder: (context) => LoginScreen(widget.userRepository),
       ),
     );
+  });
+  } catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Failed to register. Please try again.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
   }
 
   @override

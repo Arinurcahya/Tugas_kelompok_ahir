@@ -1,5 +1,6 @@
 import 'package:tugas_kelompok_ahir/helpers/dbhelper.dart';
 import 'package:tugas_kelompok_ahir/models/user.dart';
+import 'package:tugas_kelompok_ahir/Models/user_datakaryawan.dart';
 
 class UserRepository {
   final DbHelper dbHelper = DbHelper.instance;
@@ -24,7 +25,14 @@ class UserRepository {
     return dbHelper.deleteUser(userId);
   }
 
-  Future<void> createKaryawan(karyawan) async {
-    
+   Future<void> createKaryawan(DataKaryawan karyawan) async {
+    await dbHelper.createKaryawanTable(); 
+    return dbHelper.insertKaryawan(karyawan);
   }
+
+  Future<List<DataKaryawan>> getDataKaryawan() async {
+    return dbHelper.getKaryawan();
+  }
+    
+  
 }

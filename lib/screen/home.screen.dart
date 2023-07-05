@@ -96,7 +96,22 @@ class _HomeScreenState extends State<HomeScreen> {
       onPressed: _goToAddScreen,
       child: Icon(Icons.people),
     ),
-    SizedBox(width: 16.0)
+    SizedBox(width: 16.0),
+    FloatingActionButton(
+      onPressed: _goToAddScreen,
+      child: Icon(Icons.production_quantity_limits_sharp),
+    ),
+      SizedBox(width: 16.0),
+    FloatingActionButton(
+      onPressed: _goToAddScreen,
+      child: Icon(Icons.warehouse),
+    ),
+      SizedBox(width: 16.0),
+    FloatingActionButton(
+      onPressed: _goToAddScreen,
+      child: Icon(Icons.newspaper),
+    ),
+    
   ],
 ),
     );

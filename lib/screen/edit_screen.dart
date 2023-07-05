@@ -44,11 +44,16 @@ class _EditScreenState extends State<EditScreen> {
     Navigator.pop(context);
   }
 
+  void _deleteUser() {
+    widget.userRepository.deleteUser(widget.user.id);
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit User'),
+        title: Text('Edit '),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -69,6 +74,13 @@ class _EditScreenState extends State<EditScreen> {
             ElevatedButton(
               onPressed: _saveChanges,
               child: Text('Save'),
+            ),
+            ElevatedButton(
+              onPressed: _deleteUser,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red, // Set the button color to red
+              ),
+              child: Text('Delete '),
             ),
           ],
         ),

@@ -3,6 +3,7 @@ import 'package:tugas_kelompok_ahir/models/user.dart';
 import 'package:tugas_kelompok_ahir/models/user_repository.dart';
 import 'package:tugas_kelompok_ahir/screen/edit_screen.dart';
 import 'package:tugas_kelompok_ahir/screen/inputkaryawan_screen.dart';
+import 'package:tugas_kelompok_ahir/screen/profil_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {

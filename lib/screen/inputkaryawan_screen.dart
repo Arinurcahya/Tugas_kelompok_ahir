@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tugas_kelompok_ahir/models/user_model.dart';
+import 'package:tugas_kelompok_ahir/Models/user_datakaryawan.dart';
 import 'package:tugas_kelompok_ahir/models/user_repository.dart';
 import 'package:tugas_kelompok_ahir/screen/datakaryawan_screen.dart';
 
@@ -52,7 +52,7 @@ class _InputKaryawanScreenState extends State<InputKaryawanScreen> {
       nik: nik,
       nama: nama,
       email: email,
-      posisi: alamat,
+      alamat: alamat,
     );
 
     try{

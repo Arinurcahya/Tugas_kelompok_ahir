@@ -80,7 +80,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             actions: [
               TextButton(
                 onPressed: () {
-                  // Navigate to the login page after dialog is closed
                   Navigator.pop(context);
                   Navigator.pushReplacement(
                     context,

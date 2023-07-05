@@ -13,14 +13,19 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
 
-  void _register() async {
+
+  Future<void> _register() async {
+    String name = _nameController.text.trim();
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
+    String confirmPassword = _confirmPasswordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
+     if (name.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -90,7 +95,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           );
         },
       ).then((value) {
-        // Navigate to the login page after dialog is closed
         Navigator.pop(context);
     Navigator.pushReplacement(
       context,
@@ -136,6 +140,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
+               controller: _nameController,
+              decoration: InputDecoration(
+                labelText: 'Name',
+                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+            ),
+             SizedBox(height: 16.0),
+            TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
@@ -156,17 +170,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               obscureText: true,
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _register,
-              child: Text('Register',
-               style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.black54, 
-               ),
+            TextField(
+              controller: _confirmPasswordController,
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
+                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
               ),
-               style: ElevatedButton.styleFrom(
+              obscureText: true,
+            ),
+            SizedBox(height: 24.0),
+            ElevatedButton(
+              onPressed: () async {
+                await _register();
+              },
+              child: Text(
+                'Register',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.black54,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
                 primary: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
               ),
             ),
           ],

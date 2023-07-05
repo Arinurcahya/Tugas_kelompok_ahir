@@ -21,7 +21,7 @@ class DbHelper {
   Future<sqflite.Database> _initDatabase() async {
     final String dbPath = await _getDatabasePath();
     return await sqflite.openDatabase(
-      dbPath,
+      dbPath,  
       version: 1,
       onCreate: _createDatabase,
     );

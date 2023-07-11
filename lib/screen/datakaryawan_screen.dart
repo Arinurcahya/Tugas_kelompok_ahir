@@ -33,6 +33,7 @@ class _DataKaryawanScreenState extends State<DataKaryawanScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Data Karyawan'),
+        backgroundColor: Colors.orange,
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),

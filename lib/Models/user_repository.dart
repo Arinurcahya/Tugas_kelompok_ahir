@@ -13,9 +13,6 @@ class UserRepository {
     return true;
   }
 
-  Future<void> createUser(User user) async {
-    return dbHelper.insertUser(user);
-  }
 
   Future<void> updateUser(User user) async {
     return dbHelper.updateUser(user);

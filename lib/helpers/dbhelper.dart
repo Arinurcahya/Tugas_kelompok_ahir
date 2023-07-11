@@ -1,3 +1,4 @@
+
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart' as sqflite;
 import 'package:path_provider/path_provider.dart';
@@ -7,9 +8,9 @@ import 'package:tugas_kelompok_ahir/Models/user_datakaryawan.dart';
 
 class DbHelper {
   static sqflite.Database? _database;
-  static final DbHelper instance = DbHelper._();
+  static final DbHelper instance = DbHelper._getInstance();
 
-  DbHelper._();
+  DbHelper._getInstance();
 
   Future<sqflite.Database> get database async {
     if (_database != null) return _database!;
@@ -19,36 +20,22 @@ class DbHelper {
   }
 
   Future<sqflite.Database> _initDatabase() async {
-    final String dbPath = await _getDatabasePath();
+    final documentDirectory= await getApplicationDocumentsDirectory();
+    final Path = path.join(documentDirectory.path, 'tugas_kelompok_ahir');
+
     return await sqflite.openDatabase(
-      dbPath,  
+      Path,  
       version: 1,
       onCreate: _createDatabase,
     );
-  }
-
-  Future<String> _getDatabasePath() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final String dbPath = path.join(directory.path, 'sawit_registration.db');
-    return dbPath;
   }
 
   Future<void> _createDatabase(sqflite.Database db, int version) async {
     await db.execute('''
       CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT,
+        username TEXT,
         password TEXT
-      )
-    ''');
-      await db.execute('''
-      CREATE TABLE karyawan (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nik TEXT,
-        nama TEXT,
-        email TEXT,
-        alamat TEXT
       )
     ''');
   }
@@ -66,9 +53,17 @@ class DbHelper {
     });
   }
 
-  Future<void> insertUser(User user) async {
-    final sqflite.Database db = await instance.database;
-    await db.insert('users', user.toJson());
+  Future<int> insertUser(Map<String, dynamic> row) async {
+    final db = await instance.database;
+    return await db.insert('users', row);
+  }
+
+  Future<Map<String, dynamic>> getUser(String username) async {
+    final db = await instance.database;
+    final result = await db.query('users',
+        where: 'username = ?', whereArgs: [username], limit: 1);
+
+    return result.isNotEmpty ? result.first : {};
   }
 
   Future<void> updateUser(User user) async {

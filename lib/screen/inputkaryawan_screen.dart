@@ -105,51 +105,60 @@ class _InputKaryawanScreenState extends State<InputKaryawanScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Input Karyawan'),
+         backgroundColor: Colors.orange,
       ),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextFormField(
-              controller: _nikController,
-              decoration: InputDecoration(labelText: 'NIK'),
-            ),
-             SizedBox(height: 16.0),
-            TextFormField(
-              controller: _namaController,
-              decoration: InputDecoration(labelText: 'Nama'),
-            ),
-            SizedBox(height: 16.0),
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 16.0),
-            TextFormField(
-              controller: _alamatController,
-              decoration: InputDecoration(labelText: 'Alamat'),
-            ),
-            SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: _submitData,
-              child: Text('Submit'),
-            ),
-            SizedBox(height: 24.0),
-           ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DataKaryawanScreen(
-                      userRepository: widget.userRepository,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                controller: _nikController,
+                decoration: InputDecoration(labelText: 'NIK'),
+              ),
+               SizedBox(height: 16.0),
+              TextFormField(
+                controller: _namaController,
+                decoration: InputDecoration(labelText: 'Nama'),
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _alamatController,
+                decoration: InputDecoration(labelText: 'Alamat'),
+              ),
+              SizedBox(height: 24.0),
+              ElevatedButton(
+                onPressed: _submitData,
+                child: Text('Submit'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orange,
+                ),
+              ),
+              SizedBox(height: 24.0),
+             ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DataKaryawanScreen(
+                        userRepository: widget.userRepository,
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: Text('View Data Karyawan'),
-            ),
-          ],
+                  );
+                },
+                child: Text('View Data Karyawan'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orange,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

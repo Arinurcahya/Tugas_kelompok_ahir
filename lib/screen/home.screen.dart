@@ -1,119 +1,97 @@
-import 'package:flutter/material.dart';
-import 'package:tugas_kelompok_ahir/models/user.dart';
-import 'package:tugas_kelompok_ahir/models/user_repository.dart';
-import 'package:tugas_kelompok_ahir/screen/edit_screen.dart';
-import 'package:tugas_kelompok_ahir/screen/inputkaryawan_screen.dart';
-import 'package:tugas_kelompok_ahir/screen/profil_screen.dart';
-
-
-class HomeScreen extends StatefulWidget {
-  final UserRepository userRepository;
-
-  const HomeScreen({required this.userRepository});
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
+),
+                      ),
+                      GestureDetector(
+                        onTap: _goToGudangScreen,
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.orange,
+                                child: Icon(Icons.warehouse, color: Colors.white),
+                              ),
+                              SizedBox(height: 8.0),
+                              Text(
+                                'Gudang',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: _goToBeritaScreen,
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.orange,
+                                child: Icon(Icons.newspaper, color: Colors.white),
+                              ),
+                              SizedBox(height: 8.0),
+                              Text(
+                                'Berita',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildNavigationButton('Beranda', Icons.home, _goToHomeScreen),
+                      _buildNavigationButton('Karyawan', Icons.people, _goToKaryawanScreen),
+                      _buildNavigationButton('Gudang', Icons.warehouse, _goToGudangScreen),
+                      _buildNavigationButton('Berita', Icons.newspaper, _goToBeritaScreen),
+                    ],
+                  ),
+                ),
+              ],
+           
+          ),
+        );
+      },
+    ),
+  );
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<User>> _usersFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _usersFuture = widget.userRepository.getUsers();
-  }
-
-  void _goToAddScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => InputKaryawanScreen(
-          userRepository: widget.userRepository,
-        ),
-      ),
-    );
-  }
-
-  void _goToProfileScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProfileScreen(),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('MENU'),
-      ),
-      body: FutureBuilder<List<User>>(
-        future: _usersFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          final List<User> employees = snapshot.data ?? [];
-
-          return ListView.builder(
-            itemCount: employees.length,
-            itemBuilder: (context, index) {
-              final User employee = employees[index];
-              return ListTile(
-                title: Text(employee.name),
-                subtitle: Text(employee.email),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditScreen(
-                        user: employee,
-                        userRepository: widget.userRepository,
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-          );
-        },
-      ),
-      floatingActionButton: Row(
-  mainAxisAlignment: MainAxisAlignment.end,
-  children: [
-    FloatingActionButton(
-      onPressed: _goToProfileScreen,
-      child: Icon(Icons.person),
+Widget _buildNavigationButton(String label, IconData icon, VoidCallback onTap) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon),
+        SizedBox(height: 4.0),
+        Text(label),
+      ],
     ),
-    SizedBox(width: 16.0),
-    FloatingActionButton(
-      onPressed: _goToAddScreen,
-      child: Icon(Icons.people),
-    ),
-    SizedBox(width: 16.0),
-    FloatingActionButton(
-      onPressed: _goToAddScreen,
-      child: Icon(Icons.production_quantity_limits_sharp),
-    ),
-      SizedBox(width: 16.0),
-    FloatingActionButton(
-      onPressed: _goToAddScreen,
-      child: Icon(Icons.warehouse),
-    ),
-      SizedBox(width: 16.0),
-    FloatingActionButton(
-      onPressed: _goToAddScreen,
-      child: Icon(Icons.newspaper),
-    ),
-    
-  ],
-),
-    );
-  }
+  );
+}
 }

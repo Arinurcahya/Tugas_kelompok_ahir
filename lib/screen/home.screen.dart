@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/karet.jpg'), // Replace with your background image path
+                image: AssetImage('assets/images/karet.jpg'), 
                 fit: BoxFit.cover,
               ),
             ),
@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: GridView.count(
                     crossAxisCount: 2,
                     padding: EdgeInsets.all(16.0),
-                    childAspectRatio: 1.0, // Adjust the value to change the card size
+                    childAspectRatio: 1.0, 
                     mainAxisSpacing: 50.0,
                     crossAxisSpacing: 100.0,
                     children: [
